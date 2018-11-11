@@ -1121,13 +1121,13 @@ bool CheckProofOfWork(const CBlockHeader& block, const Consensus::Params& params
             return error("%s : no auxpow on block with auxpow version",
                          __func__);
 
-        if (!CheckProofOfWork(block.GetHash(), block.nBits, params))
+        if (!CheckProofOfWork(block.GetPoWHash(), block.nBits, params))
             return error("%s : non-AUX proof of work failed", __func__);
 
         return true;
     }
 
-    /* We have auxpow.  Check it.  */
+    /* We have auxpow.  Check it. */
 
     if (!block.IsAuxpow())
         return error("%s : auxpow on block with non-auxpow version", __func__);
@@ -1229,15 +1229,12 @@ bool ReadBlockHeaderFromDisk(CBlockHeader& block, const CBlockIndex* pindex, con
 
 CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
 {
-    int halvings = nHeight / consensusParams.nSubsidyHalvingInterval;
-    // Force block reward to zero when right shift is undefined.
-    if (halvings >= 64)
+    // Force block reward to zero after 60m coins have been mined.
+    if (nHeight > 2500000)
         return 0;
-
-    CAmount nSubsidy = 50 * COIN;
-    // Subsidy is cut in half every 210,000 blocks which will occur approximately every 4 years.
-    nSubsidy >>= halvings;
-    return nSubsidy;
+    if (nHeight == 1)
+        return 55000002 * COIN; // Make sure to +2 to make an even 60m as block1 needs to pay out 2
+    return 2 * COIN;
 }
 
 bool IsInitialBlockDownload()

@@ -694,13 +694,13 @@ name_checkdb (const JSONRPCRequest& request)
 static const CRPCCommand commands[] =
 { //  category              name                      actor (function)         argNames
   //  --------------------- ------------------------  -----------------------  ----------
-    { "namecoin",           "name_show",              &name_show,              {"name"} },
-    { "namecoin",           "name_history",           &name_history,           {"name"} },
-    { "namecoin",           "name_scan",              &name_scan,              {"start","count"} },
-    { "namecoin",           "name_filter",            &name_filter,            {"regexp","maxage","from","nb","stat"} },
-    { "namecoin",           "name_pending",           &name_pending,           {"name"} },
-    { "namecoin",           "name_checkdb",           &name_checkdb,           {} },
-    { "rawtransactions",    "namerawtransaction",     &namerawtransaction,     {"hexstring","vout","nameop"} },
+    // { "namecoin",           "name_show",              &name_show,              {"name"} },
+    // { "namecoin",           "name_history",           &name_history,           {"name"} },
+    // { "namecoin",           "name_scan",              &name_scan,              {"start","count"} },
+    // { "namecoin",           "name_filter",            &name_filter,            {"regexp","maxage","from","nb","stat"} },
+    // { "namecoin",           "name_pending",           &name_pending,           {"name"} },
+    // { "namecoin",           "name_checkdb",           &name_checkdb,           {} },
+    // { "rawtransactions",    "namerawtransaction",     &namerawtransaction,     {"hexstring","vout","nameop"} },
 };
 
 void RegisterNameRPCCommands(CRPCTable &t)
