@@ -51,7 +51,7 @@ class NameImmatureNewTest (NameTestFramework):
     # We can do that by constructing it using the raw tx API.
     #
     # That previously failed:
-    #   https://github.com/namecoin/namecoin-core/issues/50
+    #   https://github.com/alaris/alaris-core/issues/50
 
     new = self.nodes[0].name_new ("b")
     newTx = self.nodes[0].getrawtransaction (new[0])

@@ -266,7 +266,7 @@ class CTransaction
 public:
     // Default transaction version.
     // FIXME: Upstream Bitcoin has default version set to 2 already.  Do this
-    // once we forked to make the tx version irrelevant for Namecoin.
+    // once we forked to make the tx version irrelevant for Alaris.
     static const int32_t CURRENT_VERSION=1;
     static const int32_t NAMECOIN_VERSION=0x7100;
 
@@ -338,7 +338,7 @@ public:
         return (vin.size() == 1 && vin[0].prevout.IsNull());
     }
 
-    bool IsNamecoin() const
+    bool IsAlaris() const
     {
         return nVersion == NAMECOIN_VERSION;
     }
@@ -414,10 +414,10 @@ struct CMutableTransaction
     }
 
     /**
-     * Turn this into a Namecoin version transaction.  It is assumed
+     * Turn this into a Alaris version transaction.  It is assumed
      * that it isn't already.
      */
-    void SetNamecoin();
+    void SetAlaris();
 };
 
 typedef std::shared_ptr<const CTransaction> CTransactionRef;

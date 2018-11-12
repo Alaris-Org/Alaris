@@ -1,34 +1,34 @@
-Namecoin Core
+Alaris Core
 ==============
 
 Setup
 ---------------------
-[Namecoin Core](http://namecoin.org/) is the official Namecoin client and it builds the backbone of the network. However, it downloads and stores the entire history of Namecoin transactions (which is currently several GBs); depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more.
+[Alaris Core](http://alaris.org/) is the official Alaris client and it builds the backbone of the network. However, it downloads and stores the entire history of Alaris transactions (which is currently several GBs); depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more.
 
 Running
 ---------------------
-The following are some helpful notes on how to run Namecoin on your native platform.
+The following are some helpful notes on how to run Alaris on your native platform.
 
 ### Unix
 
 Unpack the files into a directory and run:
 
-- `bin/namecoin-qt` (GUI) or
-- `bin/namecoind` (headless)
+- `bin/alaris-qt` (GUI) or
+- `bin/alarisd` (headless)
 
 ### Windows
 
-Unpack the files into a directory, and then run namecoin-qt.exe.
+Unpack the files into a directory, and then run alaris-qt.exe.
 
 ### OS X
 
-Drag Namecoin-Qt to your applications folder, and then run Namecoin-Qt.
+Drag Alaris-Qt to your applications folder, and then run Alaris-Qt.
 
 ### Need Help?
 
-* See the documentation at the [Namecoin Site](https://namecoin.org) for help and more information.
-* Ask for help on [#namecoin](http://webchat.freenode.net?channels=namecoin) on Freenode. If you don't have an IRC client use [webchat here](http://webchat.freenode.net?channels=namecoin).
-* Ask for help on the [Namecoin forums](https://forum.namecoin.info/index.php), in the [Technical Support board](https://forum.namecoin.info/viewforum.php?f=7).
+* See the documentation at the [Alaris Site](https://alaris.org) for help and more information.
+* Ask for help on [#alaris](http://webchat.freenode.net?channels=alaris) on Freenode. If you don't have an IRC client use [webchat here](http://webchat.freenode.net?channels=alaris).
+* Ask for help on the [Alaris forums](https://forum.alaris.info/index.php), in the [Technical Support board](https://forum.alaris.info/viewforum.php?f=7).
 
 Building
 ---------------------
@@ -44,7 +44,7 @@ The following are developer notes on how to build Bitcoin on your native platfor
 
 Development
 ---------------------
-The Namecoin repo's [root README](https://github.com/namecoin/namecore/blob/master/README.md) contains relevant information on the development process and automated testing.
+The Alaris repo's [root README](https://github.com/alaris/namecore/blob/master/README.md) contains relevant information on the development process and automated testing.
 
 - [Developer Notes](developer-notes.md)
 - [Release Notes](release-notes.md)
@@ -60,8 +60,8 @@ The Namecoin repo's [root README](https://github.com/namecoin/namecore/blob/mast
 - [Benchmarking](benchmarking.md)
 
 ### Resources
-* Discuss on the [Namecoin forums](https://forum.namecoin.info/index.php), in the [Development & Technical Discussion board](https://forum.namecoin.info/viewforum.php?f=8).
-* Discuss on [#namecoin-dev](http://webchat.freenode.net/?channels=namecoin-dev) on Freenode. If you don't have an IRC client use [webchat here](http://webchat.freenode.net/?channels=namecoin-dev).
+* Discuss on the [Alaris forums](https://forum.alaris.info/index.php), in the [Development & Technical Discussion board](https://forum.alaris.info/viewforum.php?f=8).
+* Discuss on [#alaris-dev](http://webchat.freenode.net/?channels=alaris-dev) on Freenode. If you don't have an IRC client use [webchat here](http://webchat.freenode.net/?channels=alaris-dev).
 
 ### Miscellaneous
 - [Assets Attribution](assets-attribution.md)

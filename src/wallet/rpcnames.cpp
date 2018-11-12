@@ -110,7 +110,7 @@ name_list (const JSONRPCRequest& request)
   for (const auto& item : pwallet->mapWallet)
     {
       const CWalletTx& tx = item.second;
-      if (!tx.tx->IsNamecoin ())
+      if (!tx.tx->IsAlaris ())
         continue;
 
       CNameScript nameOp;
@@ -496,14 +496,14 @@ sendtoname (const JSONRPCRequest& request)
         + HelpRequiringPassphrase (pwallet) +
         "\nArguments:\n"
         "1. \"name\"        (string, required) The name to send to.\n"
-        "2. \"amount\"      (numeric, required) The amount in nmc to send. eg 0.1\n"
+        "2. \"amount\"      (numeric, required) The amount in ALA to send. eg 0.1\n"
         "3. \"comment\"     (string, optional) A comment used to store what the transaction is for. \n"
         "                             This is not part of the transaction, just kept in your wallet.\n"
         "4. \"comment-to\"  (string, optional) A comment to store the name of the person or organization \n"
         "                             to which you're sending the transaction. This is not part of the \n"
         "                             transaction, just kept in your wallet.\n"
         "5. subtractfeefromamount  (boolean, optional, default=false) The fee will be deducted from the amount being sent.\n"
-        "                             The recipient will receive less namecoins than you enter in the amount field.\n"
+        "                             The recipient will receive less alariss than you enter in the amount field.\n"
         "6. replaceable            (boolean, optional) Allow this transaction to be replaced by a transaction with higher fees via BIP 125\n"
         "7. conf_target            (numeric, optional) Confirmation target (in blocks)\n"
         "8. \"estimate_mode\"      (string, optional, default=UNSET) The fee estimate mode, must be one of:\n"
@@ -526,7 +526,7 @@ sendtoname (const JSONRPCRequest& request)
 
   if (IsInitialBlockDownload ())
     throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD,
-                       "Namecoin is downloading blocks...");
+                       "Alaris is downloading blocks...");
 
   ObserveSafeMode ();
   LOCK2 (cs_main, pwallet->cs_wallet);

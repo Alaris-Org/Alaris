@@ -140,7 +140,7 @@ name_show (const JSONRPCRequest& request)
 
   if (IsInitialBlockDownload ())
     throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD,
-                       "Namecoin is downloading blocks...");
+                       "Alaris is downloading blocks...");
 
   ObserveSafeMode ();
 
@@ -190,7 +190,7 @@ name_history (const JSONRPCRequest& request)
 
   if (IsInitialBlockDownload ())
     throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD,
-                       "Namecoin is downloading blocks...");
+                       "Alaris is downloading blocks...");
 
   ObserveSafeMode ();
 
@@ -250,7 +250,7 @@ name_scan (const JSONRPCRequest& request)
 
   if (IsInitialBlockDownload ())
     throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD,
-                       "Namecoin is downloading blocks...");
+                       "Alaris is downloading blocks...");
 
   ObserveSafeMode ();
 
@@ -310,7 +310,7 @@ name_filter (const JSONRPCRequest& request)
 
   if (IsInitialBlockDownload ())
     throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD,
-                       "Namecoin is downloading blocks...");
+                       "Alaris is downloading blocks...");
 
   ObserveSafeMode ();
 
@@ -467,7 +467,7 @@ name_pending (const JSONRPCRequest& request)
        i != txHashes.end (); ++i)
     {
       std::shared_ptr<const CTransaction> tx = mempool.get (*i);
-      if (!tx || !tx->IsNamecoin ())
+      if (!tx || !tx->IsAlaris ())
         continue;
 
       for (const auto& txOut : tx->vout)
@@ -565,7 +565,7 @@ namerawtransaction (const JSONRPCRequest& request)
   CMutableTransaction mtx;
   if (!DecodeHexTx (mtx, request.params[0].get_str (), true))
     throw JSONRPCError (RPC_DESERIALIZATION_ERROR, "TX decode failed");
-  mtx.SetNamecoin ();
+  mtx.SetAlaris ();
 
   const size_t nOut = request.params[1].get_int ();
   if (nOut >= mtx.vout.size ())
@@ -694,12 +694,12 @@ name_checkdb (const JSONRPCRequest& request)
 static const CRPCCommand commands[] =
 { //  category              name                      actor (function)         argNames
   //  --------------------- ------------------------  -----------------------  ----------
-    // { "namecoin",           "name_show",              &name_show,              {"name"} },
-    // { "namecoin",           "name_history",           &name_history,           {"name"} },
-    // { "namecoin",           "name_scan",              &name_scan,              {"start","count"} },
-    // { "namecoin",           "name_filter",            &name_filter,            {"regexp","maxage","from","nb","stat"} },
-    // { "namecoin",           "name_pending",           &name_pending,           {"name"} },
-    // { "namecoin",           "name_checkdb",           &name_checkdb,           {} },
+    // { "alaris",           "name_show",              &name_show,              {"name"} },
+    // { "alaris",           "name_history",           &name_history,           {"name"} },
+    // { "alaris",           "name_scan",              &name_scan,              {"start","count"} },
+    // { "alaris",           "name_filter",            &name_filter,            {"regexp","maxage","from","nb","stat"} },
+    // { "alaris",           "name_pending",           &name_pending,           {"name"} },
+    // { "alaris",           "name_checkdb",           &name_checkdb,           {} },
     // { "rawtransactions",    "namerawtransaction",     &namerawtransaction,     {"hexstring","vout","nameop"} },
 };
 

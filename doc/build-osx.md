@@ -40,17 +40,17 @@ from the root of the repository.
 
 **Note**: You only need Berkeley DB if the wallet is enabled (see the section *Disable-Wallet mode* below).
 
-Build Namecoin Core
+Build Alaris Core
 ------------------------
 
-1. Clone the namecoin source code and cd into `namecoin-core`
+1. Clone the alaris source code and cd into `alaris-core`
 
-        git clone https://github.com/namecoin/namecoin-core
-        cd namecoin-core
+        git clone https://github.com/alaris/alaris-core
+        cd alaris-core
 
-2.  Build namecoin-core:
+2.  Build alaris-core:
 
-    Configure and build the headless namecoin binaries as well as the GUI (if Qt is found).
+    Configure and build the headless alaris binaries as well as the GUI (if Qt is found).
 
     You can disable the GUI build by passing `--without-gui` to configure.
 
@@ -69,26 +69,26 @@ Build Namecoin Core
 Running
 -------
 
-Namecoin Core is now available at `./src/namecoind`
+Alaris Core is now available at `./src/alarisd`
 
 Before running, it's recommended you create an RPC configuration file.
 
-    echo -e "rpcuser=namecoinrpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/Namecoin/namecoin.conf"
+    echo -e "rpcuser=alarisrpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/Alaris/alaris.conf"
 
-    chmod 600 "/Users/${USER}/Library/Application Support/Namecoin/namecoin.conf"
+    chmod 600 "/Users/${USER}/Library/Application Support/Alaris/alaris.conf"
 
-The first time you run namecoind, it will start downloading the blockchain. This process could take several hours.
+The first time you run alarisd, it will start downloading the blockchain. This process could take several hours.
 
 You can monitor the download process by looking at the debug.log file:
 
-    tail -f $HOME/Library/Application\ Support/Namecoin/debug.log
+    tail -f $HOME/Library/Application\ Support/Alaris/debug.log
 
 Other commands:
 -------
 
-    ./src/namecoind -daemon # Starts the namecoin daemon.
-    ./src/namecoin-cli --help # Outputs a list of command-line options.
-    ./src/namecoin-cli help # Outputs a list of RPC commands when the daemon is running.
+    ./src/alarisd -daemon # Starts the alaris daemon.
+    ./src/alaris-cli --help # Outputs a list of command-line options.
+    ./src/alaris-cli help # Outputs a list of RPC commands when the daemon is running.
 
 Notes
 -----

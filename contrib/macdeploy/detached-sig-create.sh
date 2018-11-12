@@ -6,7 +6,7 @@
 set -e
 
 ROOTDIR=dist
-BUNDLE="${ROOTDIR}/Namecoin-Qt.app"
+BUNDLE="${ROOTDIR}/Alaris-Qt.app"
 CODESIGN=codesign
 TEMPDIR=sign.temp
 TEMPLIST=${TEMPDIR}/signatures.txt

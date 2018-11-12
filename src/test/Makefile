@@ -1,6 +1,6 @@
 all:
-	$(MAKE) -C .. namecoin_test
+	$(MAKE) -C .. alaris_test
 clean:
-	$(MAKE) -C .. namecoin_test_clean
+	$(MAKE) -C .. alaris_test_clean
 check:
-	$(MAKE) -C .. namecoin_test_check
+	$(MAKE) -C .. alaris_test_check

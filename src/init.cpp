@@ -181,7 +181,7 @@ void Shutdown()
     /// for example if the data directory was found to be locked.
     /// Be sure that anything that writes files or flushes caches only does this if the respective
     /// module was initialized.
-    RenameThread("namecoin-shutoff");
+    RenameThread("alaris-shutoff");
     mempool.AddTransactionsUpdated(1);
 
     StopHTTPRPC();
@@ -526,8 +526,8 @@ std::string HelpMessage(HelpMessageMode mode)
 
 std::string LicenseInfo()
 {
-    const std::string URL_SOURCE_CODE = "<https://github.com/namecoin/namecoin-core>";
-    const std::string URL_WEBSITE = "<https://namecoin.org/>";
+    const std::string URL_SOURCE_CODE = "<https://github.com/alaris/alaris-core>";
+    const std::string URL_WEBSITE = "<https://alaris.org/>";
     // todo: remove urls from translations on next change
     return CopyrightHolders(strprintf(_("Copyright (C) %i-%i"), 2009, COPYRIGHT_YEAR) + " ") + "\n" +
            "\n" +
@@ -631,7 +631,7 @@ void CleanupBlockRevFiles()
 void ThreadImport(std::vector<fs::path> vImportFiles)
 {
     const CChainParams& chainparams = Params();
-    RenameThread("namecoin-loadblk");
+    RenameThread("alaris-loadblk");
 
     {
     CImportingNow imp;

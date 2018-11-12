@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-#   Convert Address - convert Bitcoin to Namecoin addresses
+#   Convert Address - convert Bitcoin to Alaris addresses
 #   Copyright (C) 2016  Daniel Kraft <d@domob.eu>
 #
 #   This program is free software: you can redistribute it and/or modify

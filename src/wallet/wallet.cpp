@@ -2743,7 +2743,7 @@ bool CWallet::CreateTransaction(const std::vector<CRecipient>& vecSend,
     CAmount nValue = 0;
     int nChangePosRequest = nChangePosInOut;
     unsigned int nSubtractFeeFromAmount = 0;
-    bool isNamecoin = false;
+    bool isAlaris = false;
     for (const auto& recipient : vecSend)
     {
         if (nValue < 0 || recipient.nAmount < 0)
@@ -2755,9 +2755,6 @@ bool CWallet::CreateTransaction(const std::vector<CRecipient>& vecSend,
 
         if (recipient.fSubtractFeeFromAmount)
             nSubtractFeeFromAmount++;
-
-        if (CNameScript::isNameScript (recipient.scriptPubKey))
-            isNamecoin = true;
     }
     if (vecSend.empty())
     {
@@ -2780,8 +2777,6 @@ bool CWallet::CreateTransaction(const std::vector<CRecipient>& vecSend,
     wtxNew.fTimeReceivedIsTxTime = true;
     wtxNew.BindWallet(this);
     CMutableTransaction txNew;
-    if (isNamecoin)
-        txNew.SetNamecoin();
 
     // Discourage fee sniping.
     //

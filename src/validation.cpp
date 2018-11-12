@@ -944,7 +944,7 @@ static bool AcceptToMemoryPoolWorker(const CChainParams& chainparams, CTxMemPool
         // invalid blocks (using TestBlockValidity), however allowing such
         // transactions into the mempool can be exploited as a DoS attack.
         //
-        // Namecoin actually allows some scripts into the mempool that would
+        // Alaris actually allows some scripts into the mempool that would
         // not (yet) be valid in a block, namely premature NAME_FIRSTUPDATE's.
         // Thus add the mempool-flag here.
         unsigned int currentBlockScriptVerifyFlags = GetBlockScriptFlags(chainActive.Tip(), Params().GetConsensus());
@@ -3116,7 +3116,7 @@ static bool FindUndoPos(CValidationState &state, int nFile, CDiskBlockPos &pos, 
    Each "object" touched in the DB may cause two locks (one read and one
    write lock).  Objects are transaction IDs and names.  Thus, count the
    total number of transaction IDs (tx themselves plus all distinct inputs).
-   In addition, each Namecoin transaction could touch at most one name,
+   In addition, each Alaris transaction could touch at most one name,
    so add them as well.  */
 bool CheckDbLockLimit(const std::vector<CTransactionRef>& vtx)
 {
@@ -3125,7 +3125,7 @@ bool CheckDbLockLimit(const std::vector<CTransactionRef>& vtx)
     for (const auto& tx : vtx)
     {
         setTxIds.insert(tx->GetHash());
-        if (tx->IsNamecoin())
+        if (tx->IsAlaris())
             ++nNames;
 
         for (const auto& txIn : tx->vin)

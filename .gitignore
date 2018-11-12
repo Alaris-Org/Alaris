@@ -7,12 +7,12 @@ src/bitcoin-tx
 src/test/test_bitcoin
 src/test/test_bitcoin_fuzzy
 src/qt/test/test_bitcoin-qt
-src/namecoind
-src/namecoin-cli
-src/namecoin-tx
-src/test/test_namecoin
-src/test/test_namecoin_fuzzy
-src/qt/test/test_namecoin-qt
+src/alarisd
+src/alaris-cli
+src/alaris-tx
+src/test/test_alaris
+src/test/test_alaris_fuzzy
+src/qt/test/test_alaris-qt
 
 # autoreconf
 Makefile.in
@@ -86,9 +86,9 @@ src/qt/bitcoin-qt.includes
 *.qm
 Makefile
 bitcoin-qt
-namecoin-qt
+alaris-qt
 Bitcoin-Qt.app
-Namecoin-Qt.app
+Alaris-Qt.app
 background.tiff*
 
 # Unit-tests
@@ -122,5 +122,5 @@ test/cache/*
 /doc/doxygen/
 
 libbitcoinconsensus.pc
-libnamecoinconsensus.pc
+libalarisconsensus.pc
 contrib/devtools/split-debug.sh

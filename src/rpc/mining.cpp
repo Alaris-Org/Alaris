@@ -440,10 +440,10 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
         throw JSONRPCError(RPC_CLIENT_P2P_DISABLED, "Error: Peer-to-peer functionality missing or disabled");
 
     if (g_connman->GetNodeCount(CConnman::CONNECTIONS_ALL) == 0)
-        throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "Namecoin is not connected!");
+        throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "Alaris is not connected!");
 
     if (IsInitialBlockDownload())
-        throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Namecoin is downloading blocks...");
+        throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Alaris is downloading blocks...");
 
     static unsigned int nTransactionsUpdatedLast;
 
@@ -960,11 +960,11 @@ void AuxMiningCheck()
   if (g_connman->GetNodeCount(CConnman::CONNECTIONS_ALL) == 0
         && !Params().MineBlocksOnDemand())
     throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED,
-                       "Namecoin is not connected!");
+                       "Alaris is not connected!");
 
   if (IsInitialBlockDownload() && !Params().MineBlocksOnDemand())
     throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD,
-                       "Namecoin is downloading blocks...");
+                       "Alaris is downloading blocks...");
 
   /* This should never fail, since the chain is already
      past the point of merge-mining start.  Check nevertheless.  */

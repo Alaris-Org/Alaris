@@ -3,7 +3,7 @@
 # Distributed under the MIT/X11 software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-# General code for Namecoin tests.
+# General code for Alaris tests.
 
 from .test_framework import BitcoinTestFramework
 from .util import *
@@ -170,5 +170,5 @@ class NameTestFramework (BitcoinTestFramework):
     signed = self.nodes[nameTo].signrawtransaction (signed['hex'])
     assert signed['complete']
     tx = signed['hex']
-    
+
     return self.nodes[nameFrom].sendrawtransaction (tx)

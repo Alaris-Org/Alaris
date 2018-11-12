@@ -65,7 +65,7 @@ static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits
 }
 
 /**
- * Build genesis block for testnet.  In Namecoin, it has a changed timestamp
+ * Build genesis block for testnet.  In Alaris, it has a changed timestamp
  * and output script (it uses Bitcoin's).
  */
 static CBlock CreateTestnetGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
@@ -97,7 +97,6 @@ class CMainParams : public CChainParams {
 public:
     CMainParams() {
         strNetworkID = "main";
-        consensus.nSubsidyHalvingInterval = 210000;
         /* Note that these are not the actual activation heights, but blocks
            after them.  They are too deep in the chain to be ever reorged,
            and thus this is also fine.  */
@@ -129,7 +128,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 0; // Not yet enabled
 
         // The best chain should have at least this much work.
-        // The value is the chain work of the Namecoin mainnet chain at height
+        // The value is the chain work of the Alaris mainnet chain at height
         // 312,290, with best block hash:
         // c98df864dce972b1948314e98e96c8a86d2c0aaa80b421fe651e203f6bab9010
         consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000010d441df8a789cb99792b2");
@@ -138,9 +137,9 @@ public:
         consensus.defaultAssumeValid = uint256S("0x514ec75480df318ffa7eb4eff82e1c583c961aa64cce71b5922662f01ed1686a"); //250000
 
         consensus.nAuxpowChainId = 0x0001;
-        consensus.nAuxpowStartHeight = 19200;
+        consensus.nAuxpowStartHeight = 0;
         consensus.fStrictChainId = true;
-        consensus.nLegacyBlocksBefore = 19200;
+        consensus.nLegacyBlocksBefore = -1;
 
         consensus.rules.reset(new Consensus::MainNetConsensus());
 
@@ -149,10 +148,10 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.
          */
-        pchMessageStart[0] = 0xf9;
-        pchMessageStart[1] = 0xbe;
-        pchMessageStart[2] = 0xb4;
-        pchMessageStart[3] = 0xfe;
+        pchMessageStart[0] = 0xfb;
+        pchMessageStart[1] = 0xcf;
+        pchMessageStart[2] = 0xcc;
+        pchMessageStart[3] = 0xd4;
         nDefaultPort = 8334;
         nPruneAfterHeight = 100000;
 
@@ -167,16 +166,14 @@ public:
         // service bits we want, but we should get them updated to support all service bits wanted by any
         // release ASAP to avoid it where possible.
         vSeeds.emplace_back("nmc.seed.quisquis.de");
-        vSeeds.emplace_back("seed.nmc.markasoftware.com");
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,52);
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,13);
-        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,180);
-        /* FIXME: Update these below.  */
-        base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x88, 0xB2, 0x1E};
-        base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x88, 0xAD, 0xE4};
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,9);
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,30);
+        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,25);
+        base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0xC6, 0x0B, 0xC8};
+        base58Prefixes[EXT_SECRET_KEY] = {0x04, 0xC6, 0x0B, 0xC9};
 
-        bech32_hrp = "nc";
+        bech32_hrp = "al";
 
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_main, pnSeed6_main + ARRAYLEN(pnSeed6_main));
 
@@ -186,21 +183,6 @@ public:
 
         checkpointData = {
             {
-                {  2016, uint256S("0000000000660bad0d9fbde55ba7ee14ddf766ed5f527e3fbca523ac11460b92")},
-                {  4032, uint256S("0000000000493b5696ad482deb79da835fe2385304b841beef1938655ddbc411")},
-                {  6048, uint256S("000000000027939a2e1d8bb63f36c47da858e56d570f143e67e85068943470c9")},
-                {  8064, uint256S("000000000003a01f708da7396e54d081701ea406ed163e519589717d8b7c95a5")},
-                { 10080, uint256S("00000000000fed3899f818b2228b4f01b9a0a7eeee907abd172852df71c64b06")},
-                { 12096, uint256S("0000000000006c06988ff361f124314f9f4bb45b6997d90a7ee4cedf434c670f")},
-                { 14112, uint256S("00000000000045d95e0588c47c17d593c7b5cb4fb1e56213d1b3843c1773df2b")},
-                { 16128, uint256S("000000000001d9964f9483f9096cf9d6c6c2886ed1e5dec95ad2aeec3ce72fa9")},
-                { 18940, uint256S("00000000000087f7fc0c8085217503ba86f796fa4984f7e5a08b6c4c12906c05")},
-                { 30240, uint256S("e1c8c862ff342358384d4c22fa6ea5f669f3e1cdcf34111f8017371c3c0be1da")},
-                { 57000, uint256S("aa3ec60168a0200799e362e2b572ee01f3c3852030d07d036e0aa884ec61f203")},
-                {112896, uint256S("73f880e78a04dd6a31efc8abf7ca5db4e262c4ae130d559730d6ccb8808095bf")},
-                {182000, uint256S("d47b4a8fd282f635d66ce34ebbeb26ffd64c35b41f286646598abfd813cba6d9")},
-                {193000, uint256S("3b85e70ba7f5433049cfbcf0ae35ed869496dbedcd1c0fafadb0284ec81d7b58")},
-                {250000, uint256S("514ec75480df318ffa7eb4eff82e1c583c961aa64cce71b5922662f01ed1686a")},
             }
         };
 
@@ -211,47 +193,6 @@ public:
                         //   (the tx=... number in the SetBestChain debug.log lines)
             0.0189      // * estimated number of transactions per second after checkpoint
         };
-
-        /* See also doc/NamecoinBugs.txt for more explanation on the
-           historical bugs added below.  */
-
-        /* These transactions have name outputs but a non-Namecoin tx version.
-           They contain NAME_NEWs, which are fine, and also NAME_FIRSTUPDATE.
-           The latter are not interpreted by namecoind, thus also ignore
-           them for us here.  */
-        addBug(98423, "bff3ed6873e5698b97bf0c28c29302b59588590b747787c7d1ef32decdabe0d1", BUG_FULLY_IGNORE);
-        addBug(98424, "e9b211007e5cac471769212ca0f47bb066b81966a8e541d44acf0f8a1bd24976", BUG_FULLY_IGNORE);
-        addBug(98425, "8aa2b0fc7d1033de28e0192526765a72e9df0c635f7305bdc57cb451ed01a4ca", BUG_FULLY_IGNORE);
-
-        /* These are non-Namecoin tx that contain just NAME_NEWs.  Those were
-           handled with a special rule previously, but now they are fully
-           disallowed and we handle the few exceptions here.  It is fine to
-           "ignore" them, as their outputs need no special Namecoin handling
-           before they are reused in a NAME_FIRSTUPDATE.  */
-        addBug(98318, "0ae5e958ff05ad8e273222656d98d076097def6d36f781a627c584b859f4727b", BUG_FULLY_IGNORE);
-        addBug(98321, "aca8ce46da1bbb9bb8e563880efcd9d6dd18342c446d6f0e3d4b964a990d1c27", BUG_FULLY_IGNORE);
-        addBug(98424, "c29b0d9d478411462a8ac29946bf6fdeca358a77b4be15cd921567eb66852180", BUG_FULLY_IGNORE);
-        addBug(98425, "221719b360f0c83fa5b1c26fb6b67c5e74e4e7c6aa3dce55025da6759f5f7060", BUG_FULLY_IGNORE);
-        addBug(193518, "597370b632efb35d5ed554c634c7af44affa6066f2a87a88046532d4057b46f8", BUG_FULLY_IGNORE);
-        addBug(195605, "0bb8c7807a9756aefe62c271770b313b31dee73151f515b1ac2066c50eaeeb91", BUG_FULLY_IGNORE);
-        addBug(195639, "3181930765b970fc43cd31d53fc6fc1da9439a28257d9067c3b5912d23eab01c", BUG_FULLY_IGNORE);
-        addBug(195639, "e815e7d774937d96a4b265ed4866b7e3dc8d9f2acb8563402e216aba6edd1e9e", BUG_FULLY_IGNORE);
-        addBug(195639, "cdfe6eda068e09fe760a70bec201feb041b8c660d0e98cbc05c8aa4106eae6ab", BUG_FULLY_IGNORE);
-        addBug(195641, "1e29e937b2a9e1f18af500371b8714157cf5ac7c95461913e08ce402de64ae75", BUG_FULLY_IGNORE);
-        addBug(195648, "d44ed6c0fac251931465f9123ada8459ec954cc6c7b648a56c9326ff7b13f552", BUG_FULLY_IGNORE);
-        addBug(197711, "dd77aea50a189935d0ef36a04856805cd74600a53193c539eb90c1e1c0f9ecac", BUG_FULLY_IGNORE);
-        addBug(204151, "f31875dfaf94bd3a93cfbed0e22d405d1f2e49b4d0750cb13812adc5e57f1e47", BUG_FULLY_IGNORE);
-
-        /* This transaction has both a NAME_NEW and a NAME_FIRSTUPDATE as
-           inputs.  This was accepted due to the "argument concatenation" bug.
-           It is fine to accept it as valid and just process the NAME_UPDATE
-           output that builds on the NAME_FIRSTUPDATE input.  (NAME_NEW has no
-           special side-effect in applying anyway.)  */
-        addBug(99381, "774d4c446cecfc40b1c02fdc5a13be6d2007233f9d91daefab6b3c2e70042f05", BUG_FULLY_APPLY);
-
-        /* These were libcoin's name stealing bugs.  */
-        addBug(139872, "2f034f2499c136a2c5a922ca4be65c1292815c753bbb100a2a26d5ad532c3919", BUG_IN_UTXO);
-        addBug(139936, "c3e76d5384139228221cce60250397d1b87adf7366086bc8d6b5e6eee03c55c7", BUG_FULLY_IGNORE);
     }
 
     int DefaultCheckNameDB () const
@@ -278,7 +219,7 @@ public:
         consensus.BIP66Height = 100;
         consensus.powLimit = uint256S("0000000fffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 14 * 24 * 60 * 60; // two weeks
-        consensus.nPowTargetSpacing = 10 * 60;
+        consensus.nPowTargetSpacing = 45;
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.nMinDifficultySince = 1394838000; // 15 Mar 2014
         consensus.fPowNoRetargeting = false;
@@ -299,7 +240,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 0; // Not yet enabled
 
         // The best chain should have at least this much work.
-        // The value is the chain work of the Namecoin testnet chain at height
+        // The value is the chain work of the Alaris testnet chain at height
         // 158,460, with best block hash:
         // cebebb916288ed48cd8a359576d900c550203883bf69fc8d5ed92c5d778a1e32
         consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000005cfea5e7ee2dd9d9");
@@ -314,10 +255,10 @@ public:
 
         consensus.rules.reset(new Consensus::TestNetConsensus());
 
-        pchMessageStart[0] = 0xfa;
-        pchMessageStart[1] = 0xbf;
-        pchMessageStart[2] = 0xb5;
-        pchMessageStart[3] = 0xfe;
+        pchMessageStart[0] = 0xfb;
+        pchMessageStart[1] = 0xcf;
+        pchMessageStart[2] = 0xcc;
+        pchMessageStart[3] = 0xd3;
         nDefaultPort = 18334;
         nPruneAfterHeight = 1000;
 
@@ -329,16 +270,15 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
-        vSeeds.emplace_back("dnsseed.test.namecoin.webbtc.com");
+        vSeeds.emplace_back("dnsseed.test.alaris.webbtc.com");
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
-        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,239);
-        /* FIXME: Update these below.  */
-        base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x35, 0x87, 0xCF};
-        base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x35, 0x83, 0x94};
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,33);
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,55);
+        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,50);
+        base58Prefixes[EXT_PUBLIC_KEY] = {0x05, 0x5E, 0xA2, 0x49};
+        base58Prefixes[EXT_SECRET_KEY] = {0x05, 0x5E, 0xA6, 0x31};
 
-        bech32_hrp = "tn";
+        bech32_hrp = "at";
 
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_test, pnSeed6_test + ARRAYLEN(pnSeed6_test));
 
@@ -442,13 +382,13 @@ public:
             0
         };
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
-        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,239);
-        base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x35, 0x87, 0xCF};
-        base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x35, 0x83, 0x94};
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,34);
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,56);
+        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,51);
+        base58Prefixes[EXT_PUBLIC_KEY] = {0x05, 0x5E, 0xA2, 0x50};
+        base58Prefixes[EXT_SECRET_KEY] = {0x05, 0x5E, 0xA6, 0x32};
 
-        bech32_hrp = "ncrt";
+        bech32_hrp = "atrt";
 
         assert(mapHistoricBugs.empty());
     }

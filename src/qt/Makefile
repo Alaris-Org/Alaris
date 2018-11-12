@@ -1,9 +1,9 @@
 .PHONY: FORCE
 all: FORCE
-	$(MAKE) -C .. namecoin_qt test_namecoin_qt
+	$(MAKE) -C .. alaris_qt test_alaris_qt
 clean: FORCE
-	$(MAKE) -C .. namecoin_qt_clean test_namecoin_qt_clean
+	$(MAKE) -C .. alaris_qt_clean test_alaris_qt_clean
 check: FORCE
-	$(MAKE) -C .. test_namecoin_qt_check
-namecoin-qt namecoin-qt.exe: FORCE
-	 $(MAKE) -C .. namecoin_qt
+	$(MAKE) -C .. test_alaris_qt_check
+alaris-qt alaris-qt.exe: FORCE
+	 $(MAKE) -C .. alaris_qt

@@ -58,7 +58,7 @@ BASE_SCRIPTS= [
     'wallet_hd.py',
     'wallet_backup.py',
     # vv Tests less than 5m vv
-    # Does not satisfy Namecoin's BDB limit.
+    # Does not satisfy Alaris's BDB limit.
     #'feature_block.py',
     'rpc_fundrawtransaction.py',
     'p2p_compactblocks.py',
@@ -314,8 +314,8 @@ def main():
 def run_tests(test_list, src_dir, build_dir, exeext, tmpdir, jobs=1, enable_coverage=False, args=[], combined_logs_len=0):
     # Warn if bitcoind is already running (unix only)
     try:
-        if subprocess.check_output(["pidof", "namecoind"]) is not None:
-            print("%sWARNING!%s There is already a namecoind process running on this system. Tests may fail unexpectedly due to resource contention!" % (BOLD[1], BOLD[0]))
+        if subprocess.check_output(["pidof", "alarisd"]) is not None:
+            print("%sWARNING!%s There is already a alarisd process running on this system. Tests may fail unexpectedly due to resource contention!" % (BOLD[1], BOLD[0]))
     except (OSError, subprocess.SubprocessError):
         pass
 
@@ -326,8 +326,8 @@ def run_tests(test_list, src_dir, build_dir, exeext, tmpdir, jobs=1, enable_cove
 
     #Set env vars
     if "BITCOIND" not in os.environ:
-        os.environ["BITCOIND"] = build_dir + '/src/namecoind' + exeext
-        os.environ["BITCOINCLI"] = build_dir + '/src/namecoin-cli' + exeext
+        os.environ["BITCOIND"] = build_dir + '/src/alarisd' + exeext
+        os.environ["BITCOINCLI"] = build_dir + '/src/alaris-cli' + exeext
 
     tests_dir = src_dir + '/test/functional/'
 

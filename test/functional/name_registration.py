@@ -39,7 +39,7 @@ class NameRegistrationTest (NameTestFramework):
     assert_raises_rpc_error (-25, 'is already being registered',
                              self.firstupdateName,
                              1, "node-0", newAconfl, "foo")
-    
+
     # Check that the name appears when the name_new is ripe.
 
     self.generate (0, 7)
@@ -132,7 +132,7 @@ class NameRegistrationTest (NameTestFramework):
     data = self.checkName (0, "test-name", "value", 30, False)
     self.checkNameHistory (1, "test-name", ["test-value", "x" * 520, "sent",
                                             "updated", "value"])
-    
+
     # Update failing after expiry.  Re-registration possible.
     self.checkName (1, "node-1", "x" * 520, None, True)
     assert_raises_rpc_error (-25, 'this name can not be updated',
@@ -146,7 +146,7 @@ class NameRegistrationTest (NameTestFramework):
     self.checkNameHistory (1, "node-1", ["x" * 520, "reregistered"])
 
     # Test that name updates are even possible with less balance in the wallet
-    # than what is locked in a name (0.01 NMC).  There was a bug preventing
+    # than what is locked in a name (0.01 ALA).  There was a bug preventing
     # this from working.
     balance = self.nodes[1].getbalance ()
     keep = Decimal ("0.001")
