@@ -470,6 +470,7 @@ static bool IsCurrentForFeeEstimation()
 
 void UpdateMempoolForReorg(DisconnectedBlockTransactions &disconnectpool, bool fAddToMempool)
 {
+
     AssertLockHeld(cs_main);
     std::vector<uint256> vHashUpdate;
     // disconnectpool's insertion_order index sorts the entries from
@@ -500,9 +501,8 @@ void UpdateMempoolForReorg(DisconnectedBlockTransactions &disconnectpool, bool f
     // UpdateTransactionsFromBlock finds descendants of any transactions in
     // the disconnectpool that were added back and cleans up the mempool state.
     mempool.UpdateTransactionsFromBlock(vHashUpdate);
-
-    // We also need to remove any now-immature transactions
     mempool.removeForReorg(pcoinsTip.get(), chainActive.Tip()->nHeight + 1, STANDARD_LOCKTIME_VERIFY_FLAGS);
+
     // Re-limit mempool size, in case we added any transactions
     LimitMempoolSize(mempool, gArgs.GetArg("-maxmempool", DEFAULT_MAX_MEMPOOL_SIZE) * 1000000, gArgs.GetArg("-mempoolexpiry", DEFAULT_MEMPOOL_EXPIRY) * 60 * 60);
 }
@@ -1115,20 +1115,16 @@ bool CheckProofOfWork(const CBlockHeader& block, const Consensus::Params& params
                      params.nAuxpowChainId, block.nVersion);
 
     /* If there is no auxpow, just check the block hash.  */
-    if (!block.auxpow)
-    {
+    if (!block.auxpow) {
         if (block.IsAuxpow())
-            return error("%s : no auxpow on block with auxpow version",
-                         __func__);
+            return error("%s : no auxpow on block with auxpow version", __func__);
 
         if (!CheckProofOfWork(block.GetPoWHash(), block.nBits, params))
             return error("%s : non-AUX proof of work failed", __func__);
-
         return true;
     }
 
     /* We have auxpow.  Check it. */
-
     if (!block.IsAuxpow())
         return error("%s : auxpow on block with non-auxpow version", __func__);
 
@@ -3125,7 +3121,7 @@ bool CheckDbLockLimit(const std::vector<CTransactionRef>& vtx)
     for (const auto& tx : vtx)
     {
         setTxIds.insert(tx->GetHash());
-        if (tx->IsAlaris())
+        if (tx->IsNamecoin())
             ++nNames;
 
         for (const auto& txIn : tx->vin)

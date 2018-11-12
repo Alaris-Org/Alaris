@@ -40,7 +40,7 @@ CTxMemPoolEntry::CTxMemPoolEntry(const CTransactionRef& _tx, const CAmount& _nFe
     nModFeesWithAncestors = nFee;
     nSigOpCostWithAncestors = sigOpCost;
 
-    if (_tx->IsAlaris())
+    if (_tx->IsNamecoin())
     {
         for (const auto& txOut : _tx->vout)
         {

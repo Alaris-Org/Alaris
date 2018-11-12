@@ -149,7 +149,7 @@ CNameMemPool::removeConflicts (const CTransaction& tx)
 {
   AssertLockHeld (pool.cs);
 
-  if (!tx.IsAlaris ())
+  if (!tx.IsNamecoin ())
     return;
 
   for (const auto& txout : tx.vout)
@@ -293,7 +293,7 @@ CNameMemPool::checkTx (const CTransaction& tx) const
 {
   AssertLockHeld (pool.cs);
 
-  if (!tx.IsAlaris ())
+  if (!tx.IsNamecoin ())
     return true;
 
   /* In principle, multiple name_updates could be performed within the
@@ -440,7 +440,7 @@ CheckNameTransaction (const CTransaction& tx, unsigned nHeight,
      If that's the case, all is fine.  For a Alaris tx instead, there
      should be at least an output (for NAME_NEW, no inputs are expected).  */
 
-  if (!tx.IsAlaris ())
+  if (!tx.IsNamecoin ())
     {
       if (nameIn != -1)
         return state.Invalid (error ("%s: non-Alaris tx %s has name inputs",
@@ -453,7 +453,7 @@ CheckNameTransaction (const CTransaction& tx, unsigned nHeight,
       return true;
     }
 
-  assert (tx.IsAlaris ());
+  assert (tx.IsNamecoin ());
   if (nameOut == -1)
     return state.Invalid (error ("%s: Alaris tx %s has no name outputs",
                                  __func__, txid));
@@ -596,7 +596,7 @@ ApplyNameTransaction (const CTransaction& tx, unsigned nHeight,
   /* This check must be done *after* the historic bug fixing above!  Some
      of the names that must be handled above are actually produced by
      transactions *not* marked as Alaris tx.  */
-  if (!tx.IsAlaris ())
+  if (!tx.IsNamecoin ())
     return;
 
   /* Changes are encoded in the outputs.  We don't have to do any checks,

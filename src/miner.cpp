@@ -237,7 +237,7 @@ bool BlockAssembler::TestPackageTransactions(const CTxMemPool::setEntries& packa
 bool
 BlockAssembler::TxAllowedForAlaris (const CTransaction& tx) const
 {
-  if (!tx.IsAlaris ())
+  if (!tx.IsNamecoin ())
     return true;
 
   bool nameOutFound = false;

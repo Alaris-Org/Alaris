@@ -547,14 +547,14 @@ BOOST_AUTO_TEST_CASE (name_tx_verification)
 
   /* Non-name tx should be non-Alaris version.  */
   BOOST_CHECK (CheckNameTransaction (baseTx, 200000, view, state, 0));
-  mtx.SetAlaris ();
+  mtx.SetNamecoin ();
   BOOST_CHECK (!CheckNameTransaction (mtx, 200000, view, state, 0));
 
   /* Name tx should be Alaris version.  */
   mtx = CMutableTransaction (baseTx);
   mtx.vin.push_back (CTxIn (inNew));
   BOOST_CHECK (!CheckNameTransaction (mtx, 200000, view, state, 0));
-  mtx.SetAlaris ();
+  mtx.SetNamecoin ();
   mtx.vin.push_back (CTxIn (inUpdate));
   BOOST_CHECK (!CheckNameTransaction (mtx, 200000, view, state, 0));
 
@@ -562,7 +562,7 @@ BOOST_AUTO_TEST_CASE (name_tx_verification)
   mtx = CMutableTransaction (baseTx);
   mtx.vout.push_back (CTxOut (COIN, scrNew));
   BOOST_CHECK (!CheckNameTransaction (mtx, 200000, view, state, 0));
-  mtx.SetAlaris ();
+  mtx.SetNamecoin ();
   BOOST_CHECK (CheckNameTransaction (mtx, 200000, view, state, 0));
   mtx.vout.push_back (CTxOut (COIN, scrNew));
   BOOST_CHECK (!CheckNameTransaction (mtx, 200000, view, state, 0));
@@ -572,7 +572,7 @@ BOOST_AUTO_TEST_CASE (name_tx_verification)
 
   /* Basic verification of NAME_NEW.  */
   mtx = CMutableTransaction (baseTx);
-  mtx.SetAlaris ();
+  mtx.SetNamecoin ();
   mtx.vout.push_back (CTxOut (COIN, scrNew));
   BOOST_CHECK (CheckNameTransaction (mtx, 200000, view, state, 0));
   mtx.vin.push_back (CTxIn (inNew));
@@ -601,7 +601,7 @@ BOOST_AUTO_TEST_CASE (name_tx_verification)
 
   /* Check update of UPDATE output, plus expiry.  */
   mtx = CMutableTransaction (baseTx);
-  mtx.SetAlaris ();
+  mtx.SetNamecoin ();
   mtx.vout.push_back (CTxOut (COIN, scrUpdate));
   BOOST_CHECK (!CheckNameTransaction (mtx, 135999, viewUpd, state, 0));
   mtx.vin.push_back (CTxIn (inUpdate));
@@ -622,7 +622,7 @@ BOOST_AUTO_TEST_CASE (name_tx_verification)
 
   /* Value length limits.  */
   mtx = CMutableTransaction (baseTx);
-  mtx.SetAlaris ();
+  mtx.SetNamecoin ();
   mtx.vin.push_back (CTxIn (inUpdate));
   scr = CNameScript::buildNameUpdate (addr, name1, tooLongValue);
   mtx.vout.push_back (CTxOut (COIN, scr));
@@ -636,7 +636,7 @@ BOOST_AUTO_TEST_CASE (name_tx_verification)
 
   /* Previous NAME_NEW is not allowed!  */
   mtx = CMutableTransaction (baseTx);
-  mtx.SetAlaris ();
+  mtx.SetNamecoin ();
   mtx.vout.push_back (CTxOut (COIN, scrUpdate));
   mtx.vin.push_back (CTxIn (inNew));
   CCoinsViewCache viewNew(&view);
@@ -651,7 +651,7 @@ BOOST_AUTO_TEST_CASE (name_tx_verification)
 
   /* Basic valid transaction.  */
   mtx = CMutableTransaction (baseTx);
-  mtx.SetAlaris ();
+  mtx.SetNamecoin ();
   mtx.vout.push_back (CTxOut (COIN, scrFirst));
   BOOST_CHECK (!CheckNameTransaction (mtx, 100012, viewClean, state, 0));
   mtx.vin.push_back (CTxIn (inNew));
@@ -681,7 +681,7 @@ BOOST_AUTO_TEST_CASE (name_tx_verification)
 
   /* Non-NAME_NEW prev output.  */
   mtx = CMutableTransaction (baseTx);
-  mtx.SetAlaris ();
+  mtx.SetNamecoin ();
   mtx.vout.push_back (CTxOut (COIN, scrFirst));
   mtx.vin.push_back (CTxIn (inUpdate));
   BOOST_CHECK (!CheckNameTransaction (mtx, 100012, viewClean, state, 0));
@@ -722,7 +722,7 @@ BOOST_AUTO_TEST_CASE (name_updates_undo)
      ApplyNameTransaction and not validation.  */
 
   CMutableTransaction mtx;
-  mtx.SetAlaris ();
+  mtx.SetNamecoin ();
   mtx.vout.push_back (CTxOut (COIN, scrNew));
   ApplyNameTransaction (mtx, 100, view, undo);
   BOOST_CHECK (!view.GetName (name, data));
@@ -896,34 +896,34 @@ BOOST_AUTO_TEST_CASE (name_mempool)
      the mempool acceptance and not validation.  */
 
   CMutableTransaction txNew1;
-  txNew1.SetAlaris ();
+  txNew1.SetNamecoin ();
   txNew1.vout.push_back (CTxOut (COIN, new1));
   CMutableTransaction txNew1p;
-  txNew1p.SetAlaris ();
+  txNew1p.SetNamecoin ();
   txNew1p.vout.push_back (CTxOut (COIN, new1p));
   CMutableTransaction txNew2;
-  txNew2.SetAlaris ();
+  txNew2.SetNamecoin ();
   txNew2.vout.push_back (CTxOut (COIN, new2));
 
   CMutableTransaction txReg1;
-  txReg1.SetAlaris ();
+  txReg1.SetNamecoin ();
   txReg1.vout.push_back (CTxOut (COIN, first1));
   CMutableTransaction txReg2;
-  txReg2.SetAlaris ();
+  txReg2.SetNamecoin ();
   txReg2.vout.push_back (CTxOut (COIN, first2));
 
   CMutableTransaction txUpd1;
-  txUpd1.SetAlaris ();
+  txUpd1.SetNamecoin ();
   txUpd1.vout.push_back (CTxOut (COIN, upd1));
   CMutableTransaction txUpd2;
-  txUpd2.SetAlaris ();
+  txUpd2.SetNamecoin ();
   txUpd2.vout.push_back (CTxOut (COIN, upd2));
 
   /* Build an invalid transaction.  It should not crash (assert fail)
      the mempool check.  */
 
   CMutableTransaction txInvalid;
-  txInvalid.SetAlaris ();
+  txInvalid.SetNamecoin ();
   mempool.checkNameOps (txInvalid);
 
   txInvalid.vout.push_back (CTxOut (COIN, new1));

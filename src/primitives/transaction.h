@@ -338,7 +338,7 @@ public:
         return (vin.size() == 1 && vin[0].prevout.IsNull());
     }
 
-    bool IsAlaris() const
+    bool IsNamecoin() const
     {
         return nVersion == NAMECOIN_VERSION;
     }
@@ -414,10 +414,10 @@ struct CMutableTransaction
     }
 
     /**
-     * Turn this into a Alaris version transaction.  It is assumed
+     * Turn this into a Namecoin version transaction.  It is assumed
      * that it isn't already.
      */
-    void SetAlaris();
+    void SetNamecoin();
 };
 
 typedef std::shared_ptr<const CTransaction> CTransactionRef;

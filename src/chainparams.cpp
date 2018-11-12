@@ -106,9 +106,9 @@ public:
         consensus.BIP34Hash = uint256S("0x514ec75480df318ffa7eb4eff82e1c583c961aa64cce71b5922662f01ed1686a");
         consensus.BIP65Height = 335000;
         consensus.BIP66Height = 250000;
-        consensus.powLimit = uint256S("00000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+        consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 14 * 24 * 60 * 60; // two weeks
-        consensus.nPowTargetSpacing = 10 * 60;
+        consensus.nPowTargetSpacing = 45;
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 1916; // 95% of 2016
@@ -128,13 +128,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 0; // Not yet enabled
 
         // The best chain should have at least this much work.
-        // The value is the chain work of the Alaris mainnet chain at height
-        // 312,290, with best block hash:
-        // c98df864dce972b1948314e98e96c8a86d2c0aaa80b421fe651e203f6bab9010
-        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000010d441df8a789cb99792b2");
+        consensus.nMinimumChainWork = uint256S("0x00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x514ec75480df318ffa7eb4eff82e1c583c961aa64cce71b5922662f01ed1686a"); //250000
+        consensus.defaultAssumeValid = uint256S("0x514ec75480df318ffa7eb4eff82e1c583c961aa64cce71b5922662f01ed1686a");
 
         consensus.nAuxpowChainId = 0x0001;
         consensus.nAuxpowStartHeight = 0;
@@ -193,6 +190,8 @@ public:
                         //   (the tx=... number in the SetBestChain debug.log lines)
             0.0189      // * estimated number of transactions per second after checkpoint
         };
+
+        assert(mapHistoricBugs.empty());
     }
 
     int DefaultCheckNameDB () const
@@ -217,7 +216,7 @@ public:
         consensus.BIP34Hash = uint256S("0xe0a05455d89a54bb7c1b5bb785d6b1b7c5bda42ed4ce8dc19d68652ba8835954");
         consensus.BIP65Height = 100;
         consensus.BIP66Height = 100;
-        consensus.powLimit = uint256S("0000000fffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+        consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 14 * 24 * 60 * 60; // two weeks
         consensus.nPowTargetSpacing = 45;
         consensus.fPowAllowMinDifficultyBlocks = true;
@@ -240,13 +239,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 0; // Not yet enabled
 
         // The best chain should have at least this much work.
-        // The value is the chain work of the Alaris testnet chain at height
-        // 158,460, with best block hash:
-        // cebebb916288ed48cd8a359576d900c550203883bf69fc8d5ed92c5d778a1e32
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000005cfea5e7ee2dd9d9");
+        consensus.nMinimumChainWork = uint256S("0x00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x00000003aae89ab2bb5ca78a41cb94a9767a94493563cb74e9245c9bd73c16a1"); //130000
+        consensus.defaultAssumeValid = uint256S("0x00000003aae89ab2bb5ca78a41cb94a9767a94493563cb74e9245c9bd73c16a1");
 
         consensus.nAuxpowStartHeight = 0;
         consensus.nAuxpowChainId = 0x0001;
