@@ -59,8 +59,8 @@ static CBlock CreateGenesisBlock(const CScript& genesisInputScript, const CScrip
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
     const char* pszTimestamp = "... choose what comes next.  Lives of your own, or a return to chains. -- V";
-    const CScript genesisInputScript = CScript() << 0x1c007fff << CScriptNum(522) << std::vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
-    const CScript genesisOutputScript = CScript() << ParseHex("04b620369050cd899ffbbc4e8ee51e8c4534a855bb463439d63d235d4779685d8b6f4870a238cf365ac94fa13ef9a2a22cd99d0d5ee86dcabcafce36c7acf43ce5") << OP_CHECKSIG;
+    const CScript genesisInputScript = CScript() << 486604799 << CScriptNum(4) << std::vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
+    const CScript genesisOutputScript = CScript() << ParseHex("04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f") << OP_CHECKSIG;
     return CreateGenesisBlock(genesisInputScript, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
 
@@ -242,7 +242,7 @@ public:
         consensus.nMinimumChainWork = uint256S("0000000000000000000000000000000000000000000000000000000000100010");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x000008aa333047fc1cb8cbc9d0d972c6a6bf85eb2f63d3958bb3aa059e4caa59");
+        consensus.defaultAssumeValid = uint256S("0x4c6965779894e4bd876a972a34a8365e3c46d4fb9eb3fa3947d83709ec94883e");
 
         consensus.nAuxpowStartHeight = 0;
         consensus.nAuxpowChainId = 0x0001;
@@ -258,9 +258,9 @@ public:
         nDefaultPort = 18334;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateTestnetGenesisBlock(1542051081, 626921, 0x1e0ffff0, 1, 0);
+        genesis = CreateTestnetGenesisBlock(1542051081, 1094517, 0x1e0ffff0, 1, 0);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x000008aa333047fc1cb8cbc9d0d972c6a6bf85eb2f63d3958bb3aa059e4caa59"));
+        assert(consensus.hashGenesisBlock == uint256S("0x4c6965779894e4bd876a972a34a8365e3c46d4fb9eb3fa3947d83709ec94883e"));
         assert(genesis.hashMerkleRoot == uint256S("0x6e1b1e196f3c33b37cb3435a303f5243df76ab7a9975cd13af5d06785b52cfb7"));
 
         vFixedSeeds.clear();

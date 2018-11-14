@@ -1116,7 +1116,7 @@ bool CheckProofOfWork(const CBlockHeader& block, const Consensus::Params& params
         if (block.IsAuxpow())
             return error("%s : no auxpow on block with auxpow version", __func__);
 
-        if (!CheckProofOfWork(block.GetHash(), block.nBits, params))
+        if (!CheckProofOfWork(block.GetPoWHash(), block.nBits, params))
             return error("%s : non-AUX proof of work failed", __func__);
         return true;
     }
