@@ -56,24 +56,11 @@ static CBlock CreateGenesisBlock(const CScript& genesisInputScript, const CScrip
  * transaction cannot be spent since it did not originally exist in the
  * database.
  */
-static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
+static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, const char* pszTimestamp="On 10/14/2018 the Alaris Genesis was created")
 {
-    const char* pszTimestamp = "... choose what comes next.  Lives of your own, or a return to chains. -- V";
     const CScript genesisInputScript = CScript() << 486604799 << CScriptNum(4) << std::vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
     const CScript genesisOutputScript = CScript() << ParseHex("04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f") << OP_CHECKSIG;
-    return CreateGenesisBlock(genesisInputScript, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
-}
-
-/**
- * Build genesis block for testnet.  In Alaris, it has a changed timestamp
- * and output script (it uses Bitcoin's).
- */
-static CBlock CreateTestnetGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
-{
-    const char* pszTimestamp = "On 10/10/2018 the Alaris Testnet Genesis was created";
-    const CScript genesisInputScript = CScript() << 486604799 << CScriptNum(4) << std::vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
-    const CScript genesisOutputScript = CScript() << ParseHex("04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f") << OP_CHECKSIG;
-    return CreateGenesisBlock(genesisInputScript, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
+    return CreateGenesisBlock(genesisInputScript, genesisOutputScript, nTime, nNonce, nBits, 1, 0);
 }
 
 void CChainParams::UpdateVersionBitsParameters(Consensus::DeploymentPos d, int64_t nStartTime, int64_t nTimeout)
@@ -152,10 +139,10 @@ public:
         nDefaultPort = 8334;
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(1303000001, 0xa21ea192u, 0x1c007fff, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1542051081, 770702, 0x1c007fff);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x000000000062b72c5e2ceb45fbc8587e807c155b0da735e6483dfba2f0a9c770"));
-        assert(genesis.hashMerkleRoot == uint256S("0x41c62dbd9068c89a449525e3cd5ac61b20ece28c3c38b3f35b2161f0e6d3cb0d"));
+        assert(consensus.hashGenesisBlock == uint256S("0xaf42de56d1f053411aef797a1be732299be260a2df6629c7f298d1ca28da8a70"));
+        assert(genesis.hashMerkleRoot == uint256S("0x8301dc42f9464447e2c560d6acdebf205e5f346636680682f7b60de1f6d43838"));
 
         // Note that of those which support the service bits prefix, most only support a subset of
         // possible options.
@@ -184,11 +171,10 @@ public:
         };
 
         chainTxData = ChainTxData{
-            // Data as of block 00000000000000000166d612d5595e2b1cd88d71d695fc580af64d8da8658c23 (height 446482).
-            1442977054, // * UNIX timestamp of last known number of transactions
-            3000785,    // * total number of transactions between genesis and that timestamp
+            1542051081, // * UNIX timestamp of last known number of transactions
+            0,          // * total number of transactions between genesis and that timestamp
                         //   (the tx=... number in the SetBestChain debug.log lines)
-            0.0189      // * estimated number of transactions per second after checkpoint
+            0           // * estimated number of transactions per second after checkpoint
         };
 
         assert(mapHistoricBugs.empty());
@@ -258,7 +244,7 @@ public:
         nDefaultPort = 18334;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateTestnetGenesisBlock(1542051081, 1094517, 0x1e0ffff0, 1, 0);
+        genesis = CreateGenesisBlock(1542051081, 1094517, 0x1e0ffff0, "On 10/10/2018 the Alaris Testnet Genesis was created");
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x4c6965779894e4bd876a972a34a8365e3c46d4fb9eb3fa3947d83709ec94883e"));
         assert(genesis.hashMerkleRoot == uint256S("0x6e1b1e196f3c33b37cb3435a303f5243df76ab7a9975cd13af5d06785b52cfb7"));
@@ -354,7 +340,7 @@ public:
         nDefaultPort = 18445;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateTestnetGenesisBlock(1541917234, 0, 0x207fffff, 1, 0);
+        genesis = CreateGenesisBlock(1541917234, 0, 0x207fffff, "On 10/10/2018 the Alaris Testnet Genesis was created");
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x13697ab74440361a18f2613e9576b829d0a02523bea1aeaa5ab9a68bf73e2993"));
         assert(genesis.hashMerkleRoot == uint256S("0x6e1b1e196f3c33b37cb3435a303f5243df76ab7a9975cd13af5d06785b52cfb7"));
