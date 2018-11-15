@@ -56,7 +56,7 @@ static CBlock CreateGenesisBlock(const CScript& genesisInputScript, const CScrip
  * transaction cannot be spent since it did not originally exist in the
  * database.
  */
-static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, const char* pszTimestamp="On 10/14/2018 the Alaris Genesis was created")
+static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, const char* pszTimestamp="On 10/10/2018 the Alaris Genesis was created")
 {
     const CScript genesisInputScript = CScript() << 486604799 << CScriptNum(4) << std::vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
     const CScript genesisOutputScript = CScript() << ParseHex("04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f") << OP_CHECKSIG;
