@@ -17,6 +17,7 @@
 #include <assert.h>
 #include <string.h>
 
+#include <util.h>
 
 /** All alphanumeric characters except for "0", "I", "O", and "l" */
 static const char* pszBase58 = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
@@ -342,21 +343,15 @@ CKey CBitcoinSecret::GetKey()
 bool CBitcoinSecret::IsValid() const
 {
     bool fExpectedFormat = vchData.size() == 32 || (vchData.size() == 33 && vchData[32] == 1);
-    bool fCorrectVersion = vchVersion == Params().Base58Prefix(CChainParams::SECRET_KEY);
+    bool fCorrectVersion = vchVersion == Params().Base58Prefix(CChainParams::SECRET_KEY) || vchVersion == Params().Base58Prefix(CChainParams::SECRET_KEY_EBST);
+    LogPrintf("CBitcoinSecret::IsValid \n");
+    LogPrintf(fCorrectVersion ? "true" : "false");
     return fExpectedFormat && fCorrectVersion;
 }
 
 bool CBitcoinSecret::SetString(const char* pszSecret)
 {
-    if (!CBase58Data::SetString(pszSecret))
-        return false;
-
-    /* Special case:  The old client used Bitcoin's secret key version
-       for private keys.  Accept that as well when importing.  */
-    if (vchVersion.size() == 1 && vchVersion[0] == 128)
-        vchVersion = Params().Base58Prefix(CChainParams::SECRET_KEY);
-
-    return IsValid();
+    return CBase58Data::SetString(pszSecret) && IsValid();
 }
 
 bool CBitcoinSecret::SetString(const std::string& strSecret)
