@@ -47,7 +47,7 @@ static const int MAX_URI_LENGTH = 255;
 #define SPINNER_FRAMES 36
 
 #define QAPP_ORG_NAME "Alaris"
-#define QAPP_ORG_DOMAIN "alaris.org"
+#define QAPP_ORG_DOMAIN "alaris.io"
 #define QAPP_APP_NAME_DEFAULT "Alaris-Qt"
 #define QAPP_APP_NAME_TESTNET "Alaris-Qt-testnet"
 

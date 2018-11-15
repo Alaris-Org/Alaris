@@ -526,8 +526,8 @@ std::string HelpMessage(HelpMessageMode mode)
 
 std::string LicenseInfo()
 {
-    const std::string URL_SOURCE_CODE = "<https://github.com/alaris/alaris-core>";
-    const std::string URL_WEBSITE = "<https://alaris.org/>";
+    const std::string URL_SOURCE_CODE = "<https://github.com/ScriptProdigy/Alaris>";
+    const std::string URL_WEBSITE = "<https://alaris.io/>";
     // todo: remove urls from translations on next change
     return CopyrightHolders(strprintf(_("Copyright (C) %i-%i"), 2009, COPYRIGHT_YEAR) + " ") + "\n" +
            "\n" +
