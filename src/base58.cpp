@@ -17,7 +17,6 @@
 #include <assert.h>
 #include <string.h>
 
-#include <util.h>
 
 /** All alphanumeric characters except for "0", "I", "O", and "l" */
 static const char* pszBase58 = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
@@ -343,15 +342,20 @@ CKey CBitcoinSecret::GetKey()
 bool CBitcoinSecret::IsValid() const
 {
     bool fExpectedFormat = vchData.size() == 32 || (vchData.size() == 33 && vchData[32] == 1);
-    bool fCorrectVersion = vchVersion == Params().Base58Prefix(CChainParams::SECRET_KEY) || vchVersion == Params().Base58Prefix(CChainParams::SECRET_KEY_EBST);
-    LogPrintf("CBitcoinSecret::IsValid \n");
-    LogPrintf(fCorrectVersion ? "true" : "false");
+    bool fCorrectVersion = vchVersion == Params().Base58Prefix(CChainParams::SECRET_KEY);
     return fExpectedFormat && fCorrectVersion;
 }
 
 bool CBitcoinSecret::SetString(const char* pszSecret)
 {
-    return CBase58Data::SetString(pszSecret) && IsValid();
+    if (!CBase58Data::SetString(pszSecret))
+        return false;
+
+    /* Special case: Accept eBoost keys */
+    if (vchVersion.size() == 1 && vchVersion[0] == 220)
+        vchVersion = Params().Base58Prefix(CChainParams::SECRET_KEY);
+
+    return IsValid();
 }
 
 bool CBitcoinSecret::SetString(const std::string& strSecret)
