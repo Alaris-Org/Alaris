@@ -136,7 +136,7 @@ public:
         pchMessageStart[1] = 0xcf;
         pchMessageStart[2] = 0xcc;
         pchMessageStart[3] = 0xd4;
-        nDefaultPort = 8334;
+        nDefaultPort = 9012;
         nPruneAfterHeight = 100000;
 
         genesis = CreateGenesisBlock(1542051081, 770702, 0x1e0ffff0);
@@ -242,7 +242,7 @@ public:
         pchMessageStart[1] = 0xcf;
         pchMessageStart[2] = 0xcc;
         pchMessageStart[3] = 0xd3;
-        nDefaultPort = 18334;
+        nDefaultPort = 19012;
         nPruneAfterHeight = 1000;
 
         genesis = CreateGenesisBlock(1542051081, 1094517, 0x1e0ffff0, "On 10/10/2018 the Alaris Testnet Genesis was created");
