@@ -151,7 +151,7 @@ public:
         // release ASAP to avoid it where possible.
         vSeeds.emplace_back("mainnet.alaris.io");
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,9);
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,23);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,30);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,25);
         base58Prefixes[SECRET_KEY_EBST] = std::vector<unsigned char>(1, 220);
