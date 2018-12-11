@@ -90,7 +90,7 @@ public:
         // FIXME: Activate BIP16 with a softfork.
         consensus.BIP16Height = 100;
         consensus.BIP34Height = 100;
-        consensus.BIP34Hash = uint256S("0x514ec75480df318ffa7eb4eff82e1c583c961aa64cce71b5922662f01ed1686a");
+        consensus.BIP34Hash = uint256S("0x2ac21fb2a21b1e26e6124dce26d6677f38fb5da561f89d0fd7d961dbdea3e759");
         consensus.BIP65Height = 100;
         consensus.BIP66Height = 100;
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
@@ -115,10 +115,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0000000000000000000000000000000000000000000000000000000000100010");
+        consensus.nMinimumChainWork = uint256S("0000000000000000000000000000000000000000000000000000000006f006f0");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x514ec75480df318ffa7eb4eff82e1c583c961aa64cce71b5922662f01ed1686a");
+        consensus.defaultAssumeValid = uint256S("0x2ac21fb2a21b1e26e6124dce26d6677f38fb5da561f89d0fd7d961dbdea3e759");
 
         consensus.nAuxpowChainId = 0x0001;
         consensus.nAuxpowStartHeight = 0;
@@ -168,6 +168,7 @@ public:
 
         checkpointData = {
             {
+                {100, uint256S("0x2ac21fb2a21b1e26e6124dce26d6677f38fb5da561f89d0fd7d961dbdea3e759")},
             }
         };
 
